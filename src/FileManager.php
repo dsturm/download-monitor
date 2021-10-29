@@ -53,6 +53,17 @@ class DLM_File_Manager {
 		$wp_uploads_dir = $wp_uploads['basedir'];
 		$wp_uploads_url = $wp_uploads['baseurl'];
 
+		// Fix fo bedrock stack
+		// TODO: Refactor to use without magic.
+		if ( 0 === strpos( $file_path, '/app/uploads/') ) {
+			$remote_file = false;
+			$file_path = str_replace(
+				'/app/uploads',
+				$wp_uploads['basedir'],
+				$file_path
+			);
+		}
+
 		// Fix for plugins that modify the uploads dir
 		if ( false === strpos( $wp_uploads_url,get_site_url() ) ) {
 			return array( $file_path, $remote_file );
