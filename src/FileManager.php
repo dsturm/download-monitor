@@ -53,6 +53,12 @@ class DLM_File_Manager {
 		$wp_uploads_dir = $wp_uploads['basedir'];
 		$wp_uploads_url = $wp_uploads['baseurl'];
 
+		// Provide filter for an early return
+		$filtered = apply_filters( 'dlm_pre_parsed_file_path', null, $file_path, $remote_file );
+		if ( is_array( $filtered ) ) {
+			return $filtered;
+		}
+
 		// Fix for plugins that modify the uploads dir
 		if ( false === strpos( $wp_uploads_url,get_site_url() ) ) {
 			return array( $file_path, $remote_file );
@@ -101,6 +107,12 @@ class DLM_File_Manager {
 			$remote_file = false;
 			$file_path   = ABSPATH . $file_path;
 			$file_path   = realpath( $file_path );
+		}
+
+		// Filter parsed data
+		$filtered = apply_filters( 'dlm_parsed_file_path', $file_path, $remote_file );
+		if ( is_array( $filtered ) ) {
+			return $filtered;
 		}
 
 		return array( $file_path, $remote_file );
