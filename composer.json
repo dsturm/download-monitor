@@ -1,6 +1,7 @@
 {
   "name": "never5/download-monitor",
   "description": "Download Monitor",
+  "type": "wordpress-plugin",
   "keywords": [
     "wordpress",
     "download monitor"
