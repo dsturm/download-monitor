@@ -204,7 +204,6 @@ class DLM_Settings_Page {
 						<input type="submit" class="button-primary"
 							   value="<?php echo esc_html__( 'Save Changes', 'download-monitor' ); ?>"/>
 					</p>
-
 				<?php } ?>
 			</form>
 		</div>
